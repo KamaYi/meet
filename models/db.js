@@ -13,5 +13,5 @@ db.on('error', function(error) {
 
 // 链接成功
 db.once('open', function(error) {
-    console.log("数据库连接成功");
+    console.log("mongoose restart");
 });
