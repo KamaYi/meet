@@ -6,16 +6,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var index = require('./src/routes/index');
-var users = require('./src/routes/users');
+var index = require('./routes/index');
+// var users = require('./src/routers/users');
 var db =  require('./models/db.js');
 var gulp = require('./gulpfile.js');
 
 var NODE_ENV = process.env;//获取版本的信息
 // console.log(NODE_ENV)
 
+app.locals.title = 'meet';
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.engine("html",require("ejs").__express);
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
@@ -26,8 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.get('/',index);
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
